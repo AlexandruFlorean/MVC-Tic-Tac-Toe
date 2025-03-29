@@ -1,15 +1,19 @@
 package player_vs_pc;
 
 import common.*;
+import common.models.Position;
+import common.models.WinnerModel;
+import common.services.MinMaxService;
+import common.services.ModelService;
 
 public class PlayerVsPcModel {
     private char currentPlayer = Constants.PLAYER_X;
     private int turns;
     private final char[][] boardMatrix = new char[3][3];
-    private final HelperService helperService;
+    private final ModelService helperService;
     private final MinMaxService minMaxService = new MinMaxService(Constants.PLAYER_0);
 
-    public PlayerVsPcModel(HelperService helperService) {
+    public PlayerVsPcModel(ModelService helperService) {
         this.helperService = helperService;
     }
 
@@ -43,7 +47,7 @@ public class PlayerVsPcModel {
 
     public Position playComputer() {
         var position = minMaxService.minmax(boardMatrix, currentPlayer);
-        boardMatrix[position.getI()][position.getJ()] = currentPlayer;
+        boardMatrix[position.i()][position.j()] = currentPlayer;
         currentPlayer = currentPlayer == Constants.PLAYER_X ? Constants.PLAYER_0 : Constants.PLAYER_X;
         turns++;
         return position;

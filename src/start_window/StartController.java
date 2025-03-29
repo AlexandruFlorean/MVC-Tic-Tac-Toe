@@ -1,7 +1,7 @@
 package start_window;
 
-import common.HelperService;
-import common.PlayMode;
+import common.services.ModelService;
+import common.models.PlayMode;
 import pc_vs_pc.PcVsPcController;
 import pc_vs_pc.PcVsPcModel;
 import pc_vs_pc.PcVsPcView;
@@ -30,11 +30,11 @@ public class StartController {
           button.addActionListener(e -> {
               startView.closeWindow();
              if (button.getText().equals(String.valueOf(PlayMode.PLAYER_VS_PC))) {
-                 new PlayerVsPcController(new PlayerVsPcView(), new PlayerVsPcModel(new HelperService())).start();
+                 new PlayerVsPcController(new PlayerVsPcView(), new PlayerVsPcModel(new ModelService())).start();
               } else if (button.getText().equals(String.valueOf(PlayMode.PLAYER_VS_PLAYER))) {
-                 new PlayerVsPlayerController(new PlayerVsPlayerView(), new PlayerVsPlayerModel(new HelperService())).start();
+                 new PlayerVsPlayerController(new PlayerVsPlayerView(), new PlayerVsPlayerModel(new ModelService())).start();
              } else {
-                 new PcVsPcController(new PcVsPcView(), new PcVsPcModel(new HelperService())).start();
+                 new PcVsPcController(new PcVsPcView(), new PcVsPcModel(new ModelService())).start();
              }
           });
         }

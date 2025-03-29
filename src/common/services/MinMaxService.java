@@ -1,10 +1,13 @@
-package common;
+package common.services;
+
+import common.Constants;
+import common.models.Position;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MinMaxService {
-    private char computerPlayer;
+    private final char computerPlayer;
 
     public MinMaxService(char computerPlayer) {
         this.computerPlayer = computerPlayer;
@@ -50,7 +53,7 @@ public class MinMaxService {
         for (int i = 0; i < 3; i++) {
             System.arraycopy(board[i], 0, newBoard[i], 0, 3);
         }
-        newBoard[action.getI()][action.getJ()] = player;
+        newBoard[action.i()][action.j()] = player;
         return newBoard;
     }
 

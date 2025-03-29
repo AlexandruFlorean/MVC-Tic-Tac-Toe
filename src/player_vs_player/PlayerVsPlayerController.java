@@ -1,7 +1,7 @@
 package player_vs_player;
 
 import common.Constants;
-import common.HelperService;
+import common.services.ModelService;
 import start_window.StartController;
 import start_window.StartView;
 
@@ -54,7 +54,7 @@ public class PlayerVsPlayerController {
     private void addRefreshListener() {
         view.getRefreshButton().addActionListener(e -> {
             view.closeWindow();
-            new PlayerVsPlayerController(new PlayerVsPlayerView(), new PlayerVsPlayerModel(new HelperService())).start();
+            new PlayerVsPlayerController(new PlayerVsPlayerView(), new PlayerVsPlayerModel(new ModelService())).start();
         });
     }
 

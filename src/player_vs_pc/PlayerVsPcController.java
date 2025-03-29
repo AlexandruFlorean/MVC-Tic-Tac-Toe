@@ -1,7 +1,7 @@
 package player_vs_pc;
 
 import common.Constants;
-import common.HelperService;
+import common.services.ModelService;
 import start_window.StartController;
 import start_window.StartView;
 
@@ -67,7 +67,7 @@ public class PlayerVsPcController {
     private void addRefreshListener() {
         view.getRefreshButton().addActionListener(e -> {
             view.closeWindow();
-            new PlayerVsPcController(new PlayerVsPcView(), new PlayerVsPcModel(new HelperService())).start();
+            new PlayerVsPcController(new PlayerVsPcView(), new PlayerVsPcModel(new ModelService())).start();
         });
     }
 

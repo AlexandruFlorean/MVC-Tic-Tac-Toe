@@ -1,14 +1,16 @@
 package pc_vs_pc;
 
 import common.*;
+import common.models.WinnerModel;
+import common.services.ModelService;
 
 public class PcVsPcModel {
     private char currentPlayer = Constants.PLAYER_X;
     private int turns;
     private final char[][] boardMatrix = new char[3][3];
-    private final HelperService helperService;
+    private final ModelService helperService;
 
-    public PcVsPcModel(HelperService helperService) {
+    public PcVsPcModel(ModelService helperService) {
         this.helperService = helperService;
     }
 

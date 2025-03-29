@@ -1,4 +1,4 @@
-package common;
+package common.models;
 
 public enum PlayMode {
     PLAYER_VS_PLAYER("Player vs Player"),

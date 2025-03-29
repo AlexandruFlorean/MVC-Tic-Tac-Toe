@@ -1,7 +1,7 @@
 package pc_vs_pc;
 
-import common.HelperService;
-import common.Position;
+import common.services.ModelService;
+import common.models.Position;
 import start_window.StartController;
 import start_window.StartView;
 
@@ -11,6 +11,7 @@ import java.util.Random;
 public class PcVsPcController {
     private final PcVsPcView view;
     private final PcVsPcModel model;
+
     private Random rand;
     private int n;
     private int m;
@@ -44,17 +45,16 @@ public class PcVsPcController {
                 if (!model.isGameOver()) {
                     view.updateTitle(model.getCurrentPlayer() + "'s turn.");
                 }
-                if (model.isGameOver()) {
-                    view.setTie();
-                    return;
-                }
                 var winnerModel = model.existsWinner();
                 if (winnerModel.isExists()) {
                     model.setGameOver();
                     view.updateWinningBoard(winnerModel.getPositions(), winnerModel.getWinner());
+                    return;
                 }
-
-                });
+                if (model.isGameOver()) {
+                    view.setTie();
+                }
+            });
             timer.start();
         });
     }
@@ -63,7 +63,7 @@ public class PcVsPcController {
     private void addRefreshListener() {
         view.getRefreshButton().addActionListener(e -> {
             view.closeWindow();
-            new PcVsPcController(new PcVsPcView(), new PcVsPcModel(new HelperService())).start();
+            new PcVsPcController(new PcVsPcView(), new PcVsPcModel(new ModelService())).start();
         });
     }
 

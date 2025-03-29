@@ -1,4 +1,4 @@
-package common;
+package common.ui_components;
 
 import javax.swing.*;
 

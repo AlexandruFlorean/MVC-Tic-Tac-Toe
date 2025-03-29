@@ -1,7 +1,7 @@
 package start_window;
 
 import common.Constants;
-import common.PlayMode;
+import common.models.PlayMode;
 
 import javax.swing.*;
 import java.awt.*;

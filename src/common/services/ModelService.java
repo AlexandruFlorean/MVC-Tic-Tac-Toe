@@ -1,9 +1,13 @@
-package common;
+package common.services;
+
+import common.Constants;
+import common.models.Position;
+import common.models.WinnerModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class HelperService {
+public class ModelService {
 
     public WinnerModel winnerExists(int n, int m, char[][] matrix) {
         for (int i = 0; i < n; i++) {

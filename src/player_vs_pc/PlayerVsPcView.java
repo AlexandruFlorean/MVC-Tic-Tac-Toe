@@ -1,12 +1,16 @@
 package player_vs_pc;
 
-import common.*;
+import common.models.Position;
+import common.services.ViewService;
+import common.ui_components.BackButton;
+import common.ui_components.RefreshButton;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
 public class PlayerVsPcView {
+    private final ViewService viewService = new ViewService();
 
     private final JFrame frame = new JFrame("Tic-Tac-Toe");
     private final JLabel textLabel = new JLabel();
@@ -41,7 +45,7 @@ public class PlayerVsPcView {
     }
 
     public void updateTile(Position position, char player) {
-        board[position.getI()][position.getJ()].setText(String.valueOf(player));
+        board[position.i()][position.j()].setText(String.valueOf(player));
     }
 
     public void updateTitle(String title) {
@@ -49,50 +53,20 @@ public class PlayerVsPcView {
     }
 
     public void updateWinningBoard(List<Position> positions, char winner) {
-        board[positions.get(0).getI()][positions.get(0).getJ()].setForeground(Color.GREEN);
-        board[positions.get(1).getI()][positions.get(1).getJ()].setForeground(Color.GREEN);
-        board[positions.get(2).getI()][positions.get(2).getJ()].setForeground(Color.GREEN);
-        textLabel.setText(String.format("%c is the winner!", winner));
+        viewService.updateWinningBoard(positions, winner, board, textLabel);
     }
 
     public void setTie() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                board[i][j].setForeground(Color.ORANGE);
-                board[i][j].setBackground(Color.GRAY);
-                textLabel.setText("Tie");
-            }
-        }
+        viewService.setTie(board, textLabel);
     }
 
     private void initializeUIComponents() {
-        frame.setVisible(true);
-        frame.setSize(Constants.BOARD_WIDTH, Constants.BOARD_HEIGHT);
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
-
-        textLabel.setBackground(Color.darkGray);
-        textLabel.setForeground(Color.white);
-        textLabel.setFont(new Font("Arial", Font.BOLD, 50));
-        textLabel.setHorizontalAlignment(JLabel.CENTER);
-        textLabel.setText("Tic-Tac-Toe");
-        textLabel.setOpaque(true);
-
-        backButton.getBackButton().setFont(new Font("Arial", Font.PLAIN, 30));
-        backButton.getBackButton().setBackground(Color.darkGray);
-        backButton.getBackButton().setForeground(Color.white);
-        backButton.getBackButton().setBorderPainted(false);
-        backButton.getBackButton().setFocusPainted(false);
-        backButton.getBackButton().setFocusable(false);
-
-        refreshButton.getRefreshButton().setFont(new Font("Arial", Font.PLAIN, 30));
-        refreshButton.getRefreshButton().setBackground(Color.darkGray);
-        refreshButton.getRefreshButton().setForeground(Color.white);
-        refreshButton.getRefreshButton().setBorderPainted(false);
-        refreshButton.getRefreshButton().setFocusPainted(false);
-        refreshButton.getRefreshButton().setFocusable(false);
+        viewService.initializeFrame(frame);
+        viewService.initializeTextLabel(textLabel);
+        viewService.initializeBackButton(backButton);
+        viewService.initializeRefreshButton(refreshButton);
+        viewService.initializeBoardPanel(boardPanel);
+        frame.add(boardPanel);
 
         textPanel.setLayout(new BorderLayout());
         textPanel.add(textLabel);
@@ -100,9 +74,6 @@ public class PlayerVsPcView {
         textPanel.add(refreshButton.getRefreshButton(), BorderLayout.EAST);
         frame.add(textPanel, BorderLayout.NORTH);
 
-        boardPanel.setLayout(new GridLayout(3, 3));
-        boardPanel.setBackground(Color.darkGray);
-        frame.add(boardPanel);
         for (int r = 0; r < 3; r++) {
             for (int c = 0; c < 3; c++) {
                 JButton tile = new JButton();

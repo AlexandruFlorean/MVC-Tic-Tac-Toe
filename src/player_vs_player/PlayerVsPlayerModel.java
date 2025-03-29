@@ -1,16 +1,16 @@
 package player_vs_player;
 
 import common.Constants;
-import common.HelperService;
-import common.WinnerModel;
+import common.services.ModelService;
+import common.models.WinnerModel;
 
 public class PlayerVsPlayerModel {
     private char currentPlayer = Constants.PLAYER_X;
     private int turns;
     private final char[][] boardMatrix = new char[3][3];
-    private final HelperService helperService;
+    private final ModelService helperService;
 
-    public PlayerVsPlayerModel(HelperService helperService) {
+    public PlayerVsPlayerModel(ModelService helperService) {
         this.helperService = helperService;
     }
 
